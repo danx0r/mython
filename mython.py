@@ -17,7 +17,10 @@ class mython(list):
 
     def __eq__(self, b):
         # print (self, "==", b)
-        return mython([x for x in self if x[self.__propertyname__]==b])
+        if type(b) == mython:
+
+        else:
+            return mython([x for x in self if x[self.__propertyname__]==b])
 
     def handle_text_key(self, item):
         ret = mython([x for x in self if isinstance(x, dict) and item in x])
@@ -37,3 +40,5 @@ if __name__=="__main__":
     md.foo="bax"
     my.insert(1,md)
     print(my.bar == 4)
+    print(my.foo == 2)
+    print(my.bar == my.foo)

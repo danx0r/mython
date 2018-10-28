@@ -1,26 +1,31 @@
+"""
+alternate syntaxi
+"""
+
+
 from mython import *
 my=mython()
 
 my
 1> [{'bar': 4, 'foo': 5}, {'bar': 'three'}, {'foo': 6}]
 
-my.bar                      #try not being lazy for once
+my[this.bar]
 1> [{'bar': 4, 'foo': 5}, {'bar': 'three'}]
 
-my.bar == 4
+my[this.bar == 4]
 1> [{'bar': 4, 'foo': 5}]
 
-my.foo
+my[this.foo]
 1> [{'bar': 4, 'foo': 5}, {'foo': 6}]
 
-my.bar < my.foo
+my[this.bar < this.foo]
 1> [{'bar': 4, 'foo': 5}]
 
-not my.foo          #returns list where members do not have .foo
+my[not this.foo]          #returns list where members do not have .foo
 1> [{'bar': 'three'}]
 
-(not my.foo) & my.bar == 'three'
+my[(not this.foo) & (this.bar == 'three')]
 1> [{'bar': 'three'}]
 
-not (my.foo == 6)
+my[not (this.foo == 6)]
 1> [{'bar': 4, 'foo': 5}, {'bar': 'three'}]
