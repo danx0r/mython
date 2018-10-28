@@ -1,27 +1,26 @@
-my.bar          #(lazy) returns my where there is a bar key
+from mython import *
+my=mython()
+
+my
+1> [{'bar': 4, 'foo': 5}, {'bar': 'three'}, {'foo': 6}]
+
+my.bar                      #try not being lazy for once
+1> [{'bar': 4, 'foo': 5}, {'bar': 'three'}]
 
 my.bar == 4
+1> [{'bar': 4, 'foo': 5}]
+
+my.foo
+1> [{'bar': 4, 'foo': 5}, {'foo': 6}]
 
 my.bar < my.foo
+1> [{'bar': 4, 'foo': 5}]
 
-(my.bar & my.foo) | (my.xap in my.baz)
+not my.foo          #returns list where members do not have .foo
+1> [{'bar': 'three'}]
 
-# implementation:
-#
-# lazy -- doesn't compute output until asked. so:
+(not my.foo) & my.bar == 'three'
+1> [{'bar': 'three'}]
 
-my.bar
-
-#returns an object which, if subscripted, returns values:
-
-my.bar[1]
-
-#but if used in an expression, remains lazy:
-
-x=my.bar > 10       #still lazy after all these years
-
-x[0]                #computes values (generator?)
-
-not my.bar          #returns list where members do not have .bar
-
-(not my.bar) & my.foo   #members with foo & not bar
+not (my.foo == 6)
+1> [{'bar': 4, 'foo': 5}, {'bar': 'three'}]
