@@ -7,7 +7,7 @@ class mython(list):
             return self.handle_text_key(item)
 
     def handle_text_key(self, exp):
-        print ("EXP:", exp)
+        # print ("EXP:", exp)
         while '.' in exp:
             beg = exp.find('.')
             if ' ' in exp[beg:]:
@@ -19,22 +19,33 @@ class mython(list):
                 exp = exp[:beg] + '__x__["""' + key + '"""]' + exp[end:]
             else:
                 exp = exp[:beg] + '__x__' + exp[end:]
-        print ("handle_text:", exp)
+        # print ("handle_text:", exp)
         ret = []
         for __x__ in self:
             try:
                 if eval(exp):
                     ret.append(__x__)
             except:
-                print ("~~~", __x__)
+                # print ("~~~", __x__)
                 pass
         return ret
 
 if __name__=="__main__":
     my=mython([{'foo':2}, dict(bar=1, foo=11, baz=3), {'bar':4}])
+    print('my')
     print(my)
-    # print(my[".foo"])
-    # print(my["not .foo"])
-    # print(my[".foo == 2"])
+    print()
+    print('my[".foo"]')
+    print(my[".foo"])
+    print()
+    print("""my["'foo' not in ."]""")
+    print(my["'foo' not in ."])
+    print()
+    print('my[".foo == 2"]')
+    print(my[".foo == 2"])
+    print()
+    print("""my["'foo' in . and .foo >= 2 or (.bar > 2 and .bar < 6)"]""")
     print(my["'foo' in . and .foo >= 2 or (.bar > 2 and .bar < 6)"])
+    print()
+    print('my[".foo > .bar"]')
     print(my[".foo > .bar"])
