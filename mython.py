@@ -1,3 +1,5 @@
+from mydict import *
+
 class mython(list):
     def __getitem__(self, item):
         # print ("getitem..", item)
@@ -20,7 +22,7 @@ class mython(list):
             else:
                 exp = exp[:beg] + '__x__' + exp[end:]
         # print ("handle_text:", exp)
-        ret = []
+        ret = mython()
         for __x__ in self:
             try:
                 if eval(exp):
@@ -31,15 +33,21 @@ class mython(list):
         return ret
 
 if __name__=="__main__":
-    my=mython([{'foo':2}, dict(bar=1, foo=11, baz=3), {'bar':4}])
+    my=mython()
+    my.append(mydict(foo = 2))
+    my.append(mydict(foo = 11, bar=1, baz=3))
+    my.append(mydict(box = mydict(bee = 555)))
+    my.append(mydict(bar = 4))
+    print()
+    print()
     print('my')
     print(my)
     print()
     print('my[".foo"]')
     print(my[".foo"])
     print()
-    print("""my["'foo' not in ."]""")
-    print(my["'foo' not in ."])
+    print("""my["not .foo"]""")
+    print(my["not .foo"])
     print()
     print('my[".foo == 2"]')
     print(my[".foo == 2"])
@@ -49,3 +57,12 @@ if __name__=="__main__":
     print()
     print('my[".foo > .bar"]')
     print(my[".foo > .bar"])
+    print()
+    print('my[".baz or .bar == 4"]')
+    print(my[".baz or .bar == 4"])
+    print()
+    print('my["not .foo"][".bee"]')
+    print(my["not .foo"][".box"])
+    print()
+    print('my["not .foo"][".box"][0].box.bee')
+    print(my["not .foo"][".box"][0].box.bee)
