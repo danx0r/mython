@@ -36,4 +36,5 @@ if __name__=="__main__":
     # print(my[".foo"])
     # print(my["not .foo"])
     # print(my[".foo == 2"])
-    print(my["('foo' in . and .foo >= 2) or (.bar > 2 and .bar < 6)"])
+    print(my["'foo' in . and .foo >= 2 or (.bar > 2 and .bar < 6)"])
+    print(my[".foo > .bar"])
