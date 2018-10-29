@@ -11,11 +11,14 @@ class mython(list):
         while '.' in exp:
             beg = exp.find('.')
             if ' ' in exp[beg:]:
-                end = beg+exp[beg:].find(' ')
+                end = beg + exp[beg:].find(' ')
             else:
                 end = len(exp)
             key = exp[beg+1:end]
-            exp = exp[:beg]+'__x__["""'+key+'"""]'+exp[end:]
+            if key != "":
+                exp = exp[:beg] + '__x__["""' + key + '"""]' + exp[end:]
+            else:
+                exp = exp[:beg] + '__x__' + exp[end:]
         print ("handle_text:", exp)
         ret = []
         for __x__ in self:
@@ -33,4 +36,4 @@ if __name__=="__main__":
     # print(my[".foo"])
     # print(my["not .foo"])
     # print(my[".foo == 2"])
-    print(my[".bar > 2 and .bar < 6 or .foo >= 2"])
+    print(my["('foo' in . and .foo >= 2) or (.bar > 2 and .bar < 6)"])
